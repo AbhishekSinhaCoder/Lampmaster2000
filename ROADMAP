@@ -1,0 +1,52 @@
+This is a projected roadmap for lampmaster:
+
+Version 0.1	Functional model (complete)
+
+Version 0.20	Integrated x10 code, configuration.  (complete)
+
+Version 0.3	Wait queues available for all devices
+		Slaving available for all devices
+		Relaying available for all devices
+		POST relaying available for all devices.
+		STATE updates for slaves and relays
+		Unlimited Slaves
+		X10 dimming capability.
+		URL popup support
+		Force workspace reload support
+		Fully implement bancheck routines.
+		Deamon option
+		Clean shutdown/kill
+		Break down lightserver program into header files and multiple
+			c files.
+		Interactive configuration and config file creation routine.
+		Configuration file reloading.		
+		Message received feedback confirmation
+
+Version 0.4
+		Full multi-threading 
+			mutex locking on all data structures
+			All slave loops run in their own thread.
+			Support continuous connections
+		
+		Fix all potential security holes.
+
+		cm11a input support for state updates.
+
+		Windows port	
+			
+		
+Version 0.5
+		Input device support
+			Input switches on parallel and serial
+			Input data on parallel and serial
+			Temperature and other sensor data
+
+		Bidirectional PIC communication support	
+
+Version 0.6	
+		Scheduling
+
+Version 0.7
+		Gui interface for linux & windows
+
+Version 0.8	I'm sure I'll think of something.

@@ -1,0 +1,87 @@
+This program is GPL.  Go look it up.
+Copyright 2003 by Paul Mathis.  pjm@lsic.net
+
+The lightserver code is my own creation.  I borrowed some routines from
+the bottlerocket package and the ppower package to operate the X10 devices
+from within the program, instead of calling the programs externally as I
+had been before.  
+
+Check here to find out more about bottlerocket:
+http://mlug.missouri.edu/~tymm/
+
+Check here to find out more about PPower:
+http://ppower.sourceforge.net/
+
+
+
+Instructions to install this mess:
+
+1.  make lightserver
+should work without problems, with lots of warnings.  Ignore them as long
+as it compiles.
+
+2.  This program fully supports the firecracker (cm17a) and the cm11a
+serial port interfaces.  No external programs are required to access these
+devices.
+
+3.  if you install ppower, the included ppower.conf file can be copied to
+/usr/local/etc.  It is default configured to use /dev/ttyS0 as the serial port.
+If you're using a different port, change it.  Run ppowerd when you're done.
+
+4.  The included lampserver.cfg file needs to be edited to work with your
+lamps and paths.  The format is primitive, spaces (no equal signs) are
+the delimiters.  Each label is a token and a value separated by a space.
+The value can be enclosed in quotes.
+Items you might need to change:
+brport is the serial port device name (default: /dev/ttyS0) which has the 
+	cm17a (firecracker) dongle.  set X10 type to 1
+ppowerpath to the full path of the ppower program. Set X10 type to 2.
+
+to specify an individual device you'll need to specify house, unit, and label
+like this:
+
+house 0
+unit 1
+label "A1 lamp"
+
+and so on.
+
+Read the file for more instructions.
+
+5.  run lightserver.  It'll print a bunch of debug junk.  It should say it
+connected as a slave and will just sit there.  It should be working.
+
+6.  killing lightserver or sending it the SHUTDOWN command will disconnect
+it from the dmi server.  Running it again will reconnect as normal.  If the
+primary server disappears, your end will continue to try reconnecting until
+successful.
+
+
+
+Local control:
+
+In addition to slaving devices to another server, you can also control them
+remotely.  The lightclient program will give you a commandline interface or
+you can write the command into your own programs.  It's very simple.
+
+Most commands to the server follow the following format:
+
+NAME COMMAND VALUE HOST MESSAGE
+
+NAME is the name of the device you wish to control.  This is specified in
+the configuration file.
+
+COMMAND is the action you wish to take on the device.  For switches and
+X10 devices, the command would be ON, OFF, or TOGGLE.  
+
+VALUE is an auxillary value required by some commands.  For on lamps and
+switches, this specifies how long to keep the lamp on for, before automatically
+turning it off.
+
+HOST is the hostname of the user controlling the client.  Notice, this is
+not necessarily the host that the client is located on.  For a web interface,
+you can pass it the REMOTE_ADDR address.  This allows you to track individual
+users from the same webserver and allows the built in banning functions to
+utilize it.
+
+MESSAGE is not a required field.  It only is used for the message function.
